@@ -1,0 +1,25 @@
+NAME = libftprintf.a
+CC = cc 
+CFLAGS = -Wall -Wextra -Werror
+
+SRCS = ft_print_char.c ft_print_nbr.c ft_print_unsigned.c ft_print_str.c\
+	ft_print_hex.c ft_print_address.c ft_printf.c
+OBJS = $(SRCS:.c=.o)
+
+all: $(NAME)
+
+%.o: %.c ft_print.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
